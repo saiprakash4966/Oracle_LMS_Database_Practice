@@ -1,39 +1,31 @@
 
 
-mysql> create table TechStack(Id int PRIMARY KEY,Tech_Name VARCHAR(50)not null,image_path blob,framework_cur_status VARCHAR(50),creator_stamp datetime,creator_user int not null);
-Query OK, 0 rows affected (0.05 sec)
+mysql> CREATE TABLE tech_stack    ( id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,      tech_name VARCHAR(100),      image_path VARCHAR(1024),      framework VARCHAR(100),      cur_status VARCHAR(50),      creator_stamp DATETIME NOT NULL,      creator_user VARCHAR(100)    );
+Query OK, 0 rows affected, 1 warning (0.06 sec)
 
+mysql> INSERT INTO tech_stack value(111, 'Core Java', "https://docs.google.com/document/d/JlfQg7A3FezW2XeRMbOVMV2pedmcZyj4/gt", 'SpringBoot', 'Good', '12-05-20 14:34:07', 'sai');
+Query OK, 1 row affected (0.03 sec)
 
-mysql> desc TechStack;
-+----------------------+-------------+------+-----+---------+-------+
-| Field                | Type        | Null | Key | Default | Extra |
-+----------------------+-------------+------+-----+---------+-------+
-| Id                   | int         | NO   | PRI | NULL    |       |
-| Tech_Name            | varchar(50) | NO   |     | NULL    |       |
-| image_path           | blob        | YES  |     | NULL    |       |
-| framework_cur_status | varchar(50) | YES  |     | NULL    |       |
-| creator_stamp        | datetime    | YES  |     | NULL    |       |
-| creator_user         | int         | NO   |     | NULL    |       |
-+----------------------+-------------+------+-----+---------+-------+
-6 rows in set (0.00 sec)
+mysql> INSERT INTO tech_stack value(222, 'python', "https://docs.google.com/document/d/JlfQgVMV2pedm7A3FezW2XeRMbOcZyj4/gt", 'python', 'Good', '16-02-21 11:04:07', 'prakash');
+Query OK, 1 row affected (0.01 sec)
 
+mysql> INSERT INTO tech_stack value(333, 'Core Java', "https://docs.google.com/document/d/eRMbOVMV2pJlfQg7A3FezW2XedmcZyj4/gt", 'SpringBoot', 'Good', '14-07-22 17:20:01', 'anil');
+Query OK, 1 row affected (0.01 sec)
 
-mysql> insert into Techstack values(1,'Java','java.jpg','Spring','09-09-08 01:01:00',1),
-(2,'Python','python.jpg','Falcon','11-09-08 02:01:00',2),
-(3,'DotNet','net.jpg','dotnet4','12-09-08 03:01:00',3),
-(4,'Java','java.jpg','Spring','13-09-08 04:01:00',4),
-(5,'Python','python.jpg','Spring','14-09-08 05:01:00',5);
+mysql> INSERT INTO tech_stack value(444, 'Php', "https://docs.google.com/document/d/JlfQg2pedm7A3FezW2XeRMbOVMVcZyj4/gt", 'php', 'Good', '10-07-20 14:34:07', 'vijay');
+Query OK, 1 row affected (0.01 sec)
 
+mysql> INSERT INTO tech_stack value(555, 'CoreJava', "https://docs.google.com/document/d/JlfVMV2pedmcQg7A3FezW2XeRMbOZyj4/gt", 'SpringBoot', 'Good', '05-05-21 11:34:07', 'manoj');
+Query OK, 1 row affected (0.01 sec)
 
-
-mysql> select * from techstack;
-+----+-----------+------------------------+----------------------+---------------------+--------------+
-| Id | Tech_Name | image_path             | framework_cur_status | creator_stamp       | creator_user |
-+----+-----------+------------------------+----------------------+---------------------+--------------+
-|  1 | Java      | 0x6A6176612E6A7067     | Spring               | 2009-09-08 01:01:00 |            1 |
-|  2 | Python    | 0x707974686F6E2E6A7067 | Falcon               | 2011-09-08 02:01:00 |            2 |
-|  3 | DotNet    | 0x6E65742E6A7067       | dotnet4              | 2012-09-08 03:01:00 |            3 |
-|  4 | Java      | 0x6A6176612E6A7067     | Spring               | 2013-09-08 04:01:00 |            4 |
-|  5 | Python    | 0x707974686F6E2E6A7067 | Spring               | 2014-09-08 05:01:00 |            5 |
-+----+-----------+------------------------+----------------------+---------------------+--------------+
+mysql> select * from tech_stack;
++-----+-----------+------------------------------------------------------------------------+------------+------------+---------------------+--------------+
+| id  | tech_name | image_path                                                             | framework  | cur_status | creator_stamp       | creator_user |
++-----+-----------+------------------------------------------------------------------------+------------+------------+---------------------+--------------+
+| 111 | Core Java | https://docs.google.com/document/d/JlfQg7A3FezW2XeRMbOVMV2pedmcZyj4/gt | SpringBoot | Good       | 2012-05-20 14:34:07 | sai          |
+| 222 | python    | https://docs.google.com/document/d/JlfQgVMV2pedm7A3FezW2XeRMbOcZyj4/gt | python     | Good       | 2016-02-21 11:04:07 | prakash      |
+| 333 | Core Java | https://docs.google.com/document/d/eRMbOVMV2pJlfQg7A3FezW2XedmcZyj4/gt | SpringBoot | Good       | 2014-07-22 17:20:01 | anil         |
+| 444 | Php       | https://docs.google.com/document/d/JlfQg2pedm7A3FezW2XeRMbOVMVcZyj4/gt | php        | Good       | 2010-07-20 14:34:07 | vijay        |
+| 555 | CoreJava  | https://docs.google.com/document/d/JlfVMV2pedmcQg7A3FezW2XeRMbOZyj4/gt | SpringBoot | Good       | 2005-05-21 11:34:07 | manoj        |
++-----+-----------+------------------------------------------------------------------------+------------+------------+---------------------+--------------+
 5 rows in set (0.00 sec)
