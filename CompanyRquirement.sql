@@ -1,45 +1,53 @@
 
 
-mysql> desc  Company_Requirement;
-+----------------------+-------------+------+-----+---------+-------+
-| Field                | Type        | Null | Key | Default | Extra |
-+----------------------+-------------+------+-----+---------+-------+
-| Id                   | int         | NO   | PRI | NULL    |       |
-| Company_Id           | int         | NO   |     | NULL    |       |
-| Requested_Month      | datetime    | YES  |     | NULL    |       |
-| City                 | varchar(50) | NO   |     | NULL    |       |
-| is_doc_verification  | tinyint(1)  | YES  |     | NULL    |       |
-| requirement_doc_path | varchar(50) | YES  |     | NULL    |       |
-| no_of_engg           | int         | NO   |     | NULL    |       |
-| tech_stack_id        | int         | NO   |     | NULL    |       |
-| tech_type_id         | int         | NO   |     | NULL    |       |
-| maker_program_id     | int         | NO   |     | NULL    |       |
-| lead_id              | int         | NO   |     | NULL    |       |
-| Ideation_engg_id     | int         | NO   |     | NULL    |       |
-| buddy_engg_id        | int         | NO   |     | NULL    |       |
-| special_remarkStatus | varchar(50) | YES  |     | NULL    |       |
-| creator_stamp        | datetime    | YES  |     | NULL    |       |
-| creator_user         | int         | NO   |     | NULL    |       |
-+----------------------+-------------+------+-----+---------+-------+
-16 rows in set (0.00 sec)
-
-mysql> insert into company_requirement values(1,404,'02-01-19 01:00:00','Mumbai',1,'www.bl.com',200,1,1,1,1,10,20,'good','09-09-19 02:00:00',1),
-(2,405,'03-01-19 01:00:00','Bangalore',1,'www.bl.com',100,2,2,2,2,20,40,'good','19-09-19 03:00:00',2),
-(3,406,'04-01-19 01:00:00','Hyderabad',1,'www.bl.com',300,1,1,1,1,30,60,'good','29-09-19 02:00:00',3),
-(4,407,'05-01-19 01:00:00','Pune',1,'www.bl.com',400,1,1,1,1,40,80,'good','19-09-19 05:00:00',4),
-(5,408,'06-01-19 01:00:00','Mumbai',1,'www.bl.com',500,1,1,1,1,50,90,'good','29-09-19 02:00:00',5);
-
-
+CREATE TABLE company_requirement
+    (id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      company_id INT(10),
+      requested_month DATETIME,
+      city VARCHAR(100),
+      is_doc_verification ENUM('yes', 'no'),
+      requirement_doc_path VARCHAR(1024),
+      no_of_engg INT,
+      tech_stack_id INT(10),
+      tech_type_id INT(10),
+      maker_program_id INT(10),
+      lead_id INT(10),
+      ideation_engg_id INT(10),
+      buddy_engg_id INT(10),
+      special_remark VARCHAR(200),
+      status ENUM('active', 'inactive'),
+      creator_stamp DATETIME NOT NULL,
+      creator_user VARCHAR(100),
+       FOREIGN KEY (company_id) REFERENCES company(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (tech_stack_id) REFERENCES tech_stack(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (tech_type_id) REFERENCES tech_type(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (maker_program_id) REFERENCES maker_program(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (lead_id) REFERENCES mentor(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (ideation_engg_id) REFERENCES mentor(id)
+       ON UPDATE CASCADE ON DELETE CASCADE,
+       FOREIGN KEY (buddy_engg_id) REFERENCES mentor(id)
+       ON UPDATE CASCADE ON DELETE CASCADE
+    );
+INSERT into company_requirement values(1,1,'12-01-18 01:00:00','Mumbai','yes','www.bl.com',200,111,1,1,1,1,5,'good','active','09-09-19 02:00:00','ram');
+INSERT into company_requirement values(2,2,'03-03-20 01:00:00','Bangalore','yes','www.bl.com',300,222,2,2,2,3,5,'good','active','19-09-19 03:00:00','pinky');
+INSERT into company_requirement values(3,3,'24-07-18 01:00:00','Hyderabad','yes','www.bl.com',400,333,3,3,3,5,5,'good','active','29-09-19 02:00:00','manoj');
+INSERT into company_requirement values(4,4,'25-07-18 01:00:00','Pune','yes','www.bl.com',700,444,4,3,3,4,5,'good','active','29-09-19 02:00:00','manoj');
+INSERT into company_requirement values(5,5,'26-07-18 01:00:00','chennai','yes','www.bl.com',800,555,5,3,3,5,5,'good','active','29-09-19 02:00:00','manoj');
 
 
 mysql> select * from company_requirement;
-+----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------------+---------------------+--------------+
-| Id | Company_Id | Requested_Month     | City      | is_doc_verification | requirement_doc_path | no_of_engg | tech_stack_id | tech_type_id | maker_program_id | lead_id | Ideation_engg_id | buddy_engg_id | special_remarkStatus | creator_stamp       | creator_user |
-+----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------------+---------------------+--------------+
-|  1 |        404 | 2002-01-19 01:00:00 | Mumbai    |                   1 | www.bl.com           |        200 |             1 |            1 |                1 |       1 |               10 |            20 | good                 | 2009-09-19 02:00:00 |            1 |
-|  2 |        405 | 2003-01-19 01:00:00 | Bangalore |                   1 | www.bl.com           |        100 |             2 |            2 |                2 |       2 |               20 |            40 | good                 | 2019-09-19 03:00:00 |            2 |
-|  3 |        406 | 2004-01-19 01:00:00 | Hyderabad |                   1 | www.bl.com           |        300 |             1 |            1 |                1 |       1 |               30 |            60 | good                 | 2029-09-19 02:00:00 |            3 |
-|  4 |        407 | 2005-01-19 01:00:00 | Pune      |                   1 | www.bl.com           |        400 |             1 |            1 |                1 |       1 |               40 |            80 | good                 | 2019-09-19 05:00:00 |            4 |
-|  5 |        408 | 2006-01-19 01:00:00 | Mumbai    |                   1 | www.bl.com           |        500 |             1 |            1 |                1 |       1 |               50 |            90 | good                 | 2029-09-19 02:00:00 |            5 |
-+----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------------+---------------------+--------------+
++----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
+| id | company_id | requested_month     | city      | is_doc_verification | requirement_doc_path | no_of_engg | tech_stack_id | tech_type_id | maker_program_id | lead_id | ideation_engg_id | buddy_engg_id | special_remark | status | creator_stamp       | creator_user |
++----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
+|  1 |          1 | 2012-01-18 01:00:00 | Mumbai    | yes                 | www.bl.com           |        200 |           111 |            1 |                1 |       1 |                1 |             5 | good           | active | 2009-09-19 02:00:00 | ram          |
+|  2 |          2 | 2003-03-20 01:00:00 | Bangalore | yes                 | www.bl.com           |        300 |           222 |            2 |                2 |       2 |                3 |             5 | good           | active | 2019-09-19 03:00:00 | pinky        |
+|  3 |          3 | 2024-07-18 01:00:00 | Hyderabad | yes                 | www.bl.com           |        400 |           333 |            3 |                3 |       3 |                5 |             5 | good           | active | 2029-09-19 02:00:00 | manoj        |
+|  4 |          4 | 2025-07-18 01:00:00 | Pune      | yes                 | www.bl.com           |        700 |           444 |            4 |                3 |       3 |                4 |             5 | good           | active | 2029-09-19 02:00:00 | manoj        |
+|  5 |          5 | 2026-07-18 01:00:00 | chennai   | yes                 | www.bl.com           |        800 |           555 |            5 |                3 |       3 |                5 |             5 | good           | active | 2029-09-19 02:00:00 | manoj        |
++----+------------+---------------------+-----------+---------------------+----------------------+------------+---------------+--------------+------------------+---------+------------------+---------------+----------------+--------+---------------------+--------------+
 5 rows in set (0.00 sec)
