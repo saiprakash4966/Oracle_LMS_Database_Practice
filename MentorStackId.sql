@@ -1,35 +1,43 @@
-mysql> create table Mentor_Tech_Stack(Id int PRIMARY KEY,Mentor_Id int not null,Tech_stack_id int not null,Status VARCHAR(50),creator_stamp datetime,creator_user int not null);
-Query OK, 0 rows affected (0.04 sec)
+CREATE TABLE mentor_tech_stack
+    ->     ( id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ->       mentor_id INT(10),
+    ->       tech_stack_id INT(10),
+    ->       status ENUM('active', 'inactive'),
+    ->       creator_stamp DATETIME NOT NULL,
+    ->       creator_user VARCHAR(100),
+    ->        FOREIGN KEY (mentor_id)
+    ->        REFERENCES mentor(id)
+    ->        ON UPDATE CASCADE
+    ->        ON DELETE CASCADE,
+    ->        FOREIGN KEY (tech_stack_id)
+    ->        REFERENCES tech_stack(id)
+    ->        ON UPDATE CASCADE
+    ->        ON DELETE CASCADE
+    ->     );
 
-mysql> desc Mentor_Tech_Stack;
-+---------------+-------------+------+-----+---------+-------+
-| Field         | Type        | Null | Key | Default | Extra |
-+---------------+-------------+------+-----+---------+-------+
-| Id            | int         | NO   | PRI | NULL    |       |
-| Mentor_Id     | int         | NO   |     | NULL    |       |
-| Tech_stack_id | int         | NO   |     | NULL    |       |
-| Status        | varchar(50) | YES  |     | NULL    |       |
-| creator_stamp | datetime    | YES  |     | NULL    |       |
-| creator_user  | int         | NO   |     | NULL    |       |
-+---------------+-------------+------+-----+---------+-------+
-6 rows in set (0.00 sec)
+mysql> INSERT INTO mentor_tech_stack VALUES(1, 1, 111, 'Active', '10-07-20 14:34:07', 'sai');
+Query OK, 1 row affected (0.02 sec)
 
+mysql> INSERT INTO mentor_tech_stack VALUES(2, 2, 222, 'Active', '10-07-20 14:34:07', 'raju');
+Query OK, 1 row affected (0.02 sec)
 
-mysql> insert into mentor_tech_stack values(1,50,111,'Available','03-09-08 02:02:01',1),
-(2,51,112,'Available','04-09-08 03:02:01',2),
-(3,52,113,'Available','05-09-08 04:02:01',3),
-(4,53,114,'Available','06-09-08 05:02:01',4),
-(5,54,115,'Available','07-09-08 06:02:01',5);
+mysql> INSERT INTO mentor_tech_stack VALUES(3, 3, 333, 'Active', '14-07-22 17:20:01', 'mahesh');
+Query OK, 1 row affected (0.02 sec)
 
+mysql> INSERT INTO mentor_tech_stack VALUES(4, 4, 444, 'Active', '05-05-21 11:34:07', 'vaibhav');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO mentor_tech_stack VALUES(5, 5, 555, 'Active', '10-07-20 14:34:07', 'raju');
+Query OK, 1 row affected (0.01 sec)
 
 mysql> select * from mentor_tech_stack;
-+----+-----------+---------------+-----------+---------------------+--------------+
-| Id | Mentor_Id | Tech_stack_id | Status    | creator_stamp       | creator_user |
-+----+-----------+---------------+-----------+---------------------+--------------+
-|  1 |        50 |           111 | Available | 2003-09-08 02:02:01 |            1 |
-|  2 |        51 |           112 | Available | 2004-09-08 03:02:01 |            2 |
-|  3 |        52 |           113 | Available | 2005-09-08 04:02:01 |            3 |
-|  4 |        53 |           114 | Available | 2006-09-08 05:02:01 |            4 |
-|  5 |        54 |           115 | Available | 2007-09-08 06:02:01 |            5 |
-+----+-----------+---------------+-----------+---------------------+--------------+
++----+-----------+---------------+--------+---------------------+--------------+
+| id | mentor_id | tech_stack_id | status | creator_stamp       | creator_user |
++----+-----------+---------------+--------+---------------------+--------------+
+|  1 |         1 |           111 | active | 2012-05-20 14:34:07 | sai          |
+|  2 |         2 |           222 | active | 2010-07-20 14:34:07 | raju         |
+|  3 |         3 |           333 | active | 2014-07-22 17:20:01 | mahesh       |
+|  4 |         4 |           444 | active | 2005-05-21 11:34:07 | vaibhav      |
+|  5 |         5 |           555 | active | 2010-07-20 14:34:07 | raju         |
++----+-----------+---------------+--------+---------------------+--------------+
 5 rows in set (0.00 sec)
