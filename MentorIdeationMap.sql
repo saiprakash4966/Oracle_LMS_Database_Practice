@@ -1,33 +1,31 @@
 
 
-mysql> create table Mentor_Ideation_Map(Id int PRIMARY KEY,Parent_Mentor_Id int not null,Mentor_id int not null,Status VARCHAR(50),creator_stamp datetime,creator_user int not null);
-Query OK, 0 rows affected (0.08 sec)
+mysql> CREATE TABLE mentor_ideation_map    ( id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,      parent_mentor_id INT(10),      mentor_id INT(10),      status ENUM('active', 'inactive'),      creator_stamp DATETIME NOT NULL,      creator_user VARCHAR(100),       FOREIGN KEY (parent_mentor_id)       REFERENCES mentor(id)       ON UPDATE CASCADE       ON DELETE CASCADE,       FOREIGN KEY (mentor_id)       REFERENCES mentor(id)       ON UPDATE CASCADE       ON DELETE CASCADE    );
+Query OK, 0 rows affected, 3 warnings (0.07 sec)
 
-mysql> desc Mentor_Ideation_Map;
-+------------------+-------------+------+-----+---------+-------+
-| Field            | Type        | Null | Key | Default | Extra |
-+------------------+-------------+------+-----+---------+-------+
-| Id               | int         | NO   | PRI | NULL    |       |
-| Parent_Mentor_Id | int         | NO   |     | NULL    |       |
-| Mentor_id        | int         | NO   |     | NULL    |       |
-| Status           | varchar(50) | YES  |     | NULL    |       |
-| creator_stamp    | datetime    | YES  |     | NULL    |       |
-| creator_user     | int         | NO   |     | NULL    |       |
-+------------------+-------------+------+-----+---------+-------+
-6 rows in set (0.00 sec)
+mysql> INSERT INTO mentor_ideation_map value(1, 1, 1, 'Active', '12-05-20 14:34:07', 'sai');
+Query OK, 1 row affected (0.02 sec)
 
+mysql> INSERT INTO mentor_ideation_map value(3, 1, 2, 'Active', '16-02-21 11:04:07', 'sravan');
+Query OK, 1 row affected (0.01 sec)
 
-mysql> insert into mentor_ideation_map values(1,50,1,'good','07-06-05 02:04:01',1),
-(2,51,2,'good','08-06-05 03:04:01',2),(3,52,1,'good','09-06-05 04:04:01',3),(4,53,4,'good','10-06-05 07:04:01',4),(5,54,1,'good','11-06-05 02:04:01',5);
+mysql> INSERT INTO mentor_ideation_map value(5, 1, 3, 'Active', '14-07-22 17:20:01', 'anil');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO mentor_ideation_map value(19, 1, 4, 'Active', '05-05-21 11:34:07', 'vinay');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO mentor_ideation_map value(34, 1, 5, 'Active', '10-07-20 14:34:07', 'ramesh');
+Query OK, 1 row affected (0.01 sec)
 
 mysql> select * from mentor_ideation_map;
 +----+------------------+-----------+--------+---------------------+--------------+
-| Id | Parent_Mentor_Id | Mentor_id | Status | creator_stamp       | creator_user |
+| id | parent_mentor_id | mentor_id | status | creator_stamp       | creator_user |
 +----+------------------+-----------+--------+---------------------+--------------+
-|  1 |               50 |         1 | good   | 2007-06-05 02:04:01 |            1 |
-|  2 |               51 |         2 | good   | 2008-06-05 03:04:01 |            2 |
-|  3 |               52 |         1 | good   | 2009-06-05 04:04:01 |            3 |
-|  4 |               53 |         4 | good   | 2010-06-05 07:04:01 |            4 |
-|  5 |               54 |         1 | good   | 2011-06-05 02:04:01 |            5 |
+|  1 |                1 |         1 | active | 2012-05-20 14:34:07 | sai          |
+|  3 |                1 |         2 | active | 2016-02-21 11:04:07 | sravan       |
+|  5 |                1 |         3 | active | 2014-07-22 17:20:01 | anil         |
+| 19 |                1 |         4 | active | 2005-05-21 11:34:07 | vinay        |
+| 34 |                1 |         5 | active | 2010-07-20 14:34:07 | ramesh       |
 +----+------------------+-----------+--------+---------------------+--------------+
 5 rows in set (0.00 sec)
