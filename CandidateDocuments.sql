@@ -31,9 +31,8 @@ mysql> INSERT INTO candidate_documents VALUES(4, 4, "ADHAR NO", "https://docs.go
 Query OK, 1 row affected (0.00 sec)
 
 mysql>
-mysql> INSERT INTO candidate_documents VALUES(5, 5, "AADHAR NO", "https://docs.google.com/document/aadhar", "received", "19-08-21 14:03:25", "anji");
+mysql> INSERT INTO candidate_documents VALUES(5, 5, "AADHAR NO", "https://docs.google.com/document/aadhar", "pending", "19-08-21 14:03:25", "sridhar");
 Query OK, 1 row affected (0.00 sec)
-
 
 
 mysql> select * from candidate_documents;
@@ -44,7 +43,13 @@ mysql> select * from candidate_documents;
 |  2 |            2 | ADHAR NO  | https://docs.google.com/document/aadhar | received | 2014-03-20 13:34:25 | manoj        |
 |  3 |            3 | PAN NO    | https://docs.google.com/document/pan    | received | 2016-07-21 15:36:05 | saiprakash   |
 |  4 |            4 | ADHAR NO  | https://docs.google.com/document/aadhar | received | 2018-03-22 12:52:15 | raghu        |
-|  5 |            5 | AADHAR NO | https://docs.google.com/document/aadhar | received | 2019-08-21 14:03:25 | anji         |
+|  5 |            5 | AADHAR NO | https://docs.google.com/document/aadhar | pending  | 2019-08-21 14:03:25 | sridhar      |
 +----+--------------+-----------+-----------------------------------------+----------+---------------------+--------------+
 5 rows in set (0.00 sec)
+
+
+
+
+
+
 
